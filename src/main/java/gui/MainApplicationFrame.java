@@ -25,6 +25,7 @@ import log.Logger;
 public class MainApplicationFrame extends JFrame
 {
     private final JDesktopPane desktopPane = new JDesktopPane();
+    private DataModel m_model;
     
     public MainApplicationFrame() {
         //Make the big window be indented 50 pixels from each edge
@@ -40,10 +41,14 @@ public class MainApplicationFrame extends JFrame
         
         LogWindow logWindow = createLogWindow();
         addWindow(logWindow);
-
-        GameWindow gameWindow = new GameWindow();
+        m_model = new DataModel();
+        GameWindow gameWindow = new GameWindow(m_model);
         gameWindow.setSize(400,  400);
         addWindow(gameWindow);
+
+        CoordinatesWindow coordinatesWindow = new CoordinatesWindow(m_model);
+        coordinatesWindow.setSize(200,  200);
+        addWindow(coordinatesWindow);
 
         setJMenuBar(generateMenuBar());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
